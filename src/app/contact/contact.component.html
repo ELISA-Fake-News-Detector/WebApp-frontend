@@ -1,0 +1,353 @@
+<button style="display:none;  " type="button" id="errorButton" class="btn btn-primary" data-toggle="modal" data-target="#error">
+</button>
+
+<button style="display:none;  " type="button" id="successButton" class="btn btn-primary" data-toggle="modal" data-target="#succ">
+</button>
+
+    <div id="load"></div>
+
+  <!-- Success Modal -->
+  <div class="modal fade hide" id="succ" tabindex="-1" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel2">Output</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)='redirectToHome();' aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="succMessage" style="color: #4F8A10;
+        background-color: #DFF2BF;" class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" (click)='redirectToHome();' data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Error Modal -->
+<div class="modal fade hide"  id="error" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header" >
+      <h5 class="modal-title card-title" id="ModalLabel">Server error message</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="errorMessage" style="color: #D8000C;
+    background-color: #FFBABA;" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+
+      <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+  <nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light better-bootstrap-nav-left">
+    <div id="side-menu" style="background-color:#f0f3f5 !important;">
+        <button class="close"><span aria-hidden="true">×</span></button>
+      </div>
+  <a class="navbar-brand" href="">
+    <img src='/assets/images/small_logo.png'  width="55" height="60" class="d-inline-block align-center" alt="">
+
+    <img src='/assets/images/nav_logo.png'  width="60" height="22" class="d-inline-block align-center" alt="">
+  </a>
+  <div style="width: 130px;"></div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href=""><button class="btn btn-outline-dark" type="button">HOME</button> <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <span class="btn btn-dark">
+      CONTACT
+    </span>
+  </div>
+
+</nav>
+<div class="container">
+  <div class='form hidden'>
+    <div class='face'>
+        <h1 align='center' style="font-size:40px;" class='heading'>How did the ELISA perform?</h1>
+    </div>
+
+    <div class='sliding-list'>
+      <ul>
+        <li>Absolutely Terrible!</li>
+        <li>Dissapointing</li>
+        <li>Quite Bad</li>
+        <li>Not impressed</li>
+        <li>Nothing to be proud of</li>
+        <li>Could have been better</li>
+        <li>Satisfactory</li>
+        <li>Ok, I guess</li>
+        <li>Was Great</li>
+        <li>Super Impressed!</li>
+      </ul>
+    </div>
+    <h6 align='center'>
+    <input #expression id='expression' class='slider' max='99' min='0' value='80' oninput='updateSlider(value)' type='range'><br><br>
+    <div>
+        <div class="">
+            <select #subject id='Subject' name='subject' class="select-control" style="margin:auto;">
+                <option value="" disabled='disabled' selected='selected'>I am sending message for...</option>
+                <option value="Wrong result">a wrong result</option>
+                <option value="Help us improve">helping us to improve web app</option>
+            </select>
+          </div><br><br>
+      <textarea #message name="message" id='message' required='required' placeholder="Message" value=""></textarea><br><br>
+      <textarea #source name="source" id='source' placeholder="Mention source URL if any" value=""></textarea><br><br>
+      <button (click)='submitFeedback(expression.value, subject.value, message.value, source.value)' class="button-contact" id="theButton">Submit</button>
+    </div>
+    </h6>
+  </div>
+</div>
+<style>
+html, body {
+  height: 100%;
+  margin: 0
+}
+
+body {
+  font-family: Lato, "Helvetica Neue";
+  background-color: #f5f5f2;
+  text-align: center;
+  color: #4d4d4d;
+  margin: 0;
+  height: 100%;
+
+}
+
+.face {
+  width: 100%;
+  margin: 3rem auto;
+  max-width: 400px;
+  transition: 0.6s all;
+}
+.face svg {
+  width: 100%;
+  transition: 1.5s all cubic-bezier(0.17, 0.67, 0.03, 1);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.form.hidden .face svg {
+  opacity: 0;
+  -webkit-transform: rotateX(75deg) rotateY(-30deg) translateX(50%) rotateZ(90deg);
+          transform: rotateX(75deg) rotateY(-30deg) translateX(50%) rotateZ(90deg);
+}
+
+.heading {
+  transition: 0.8s all ease 0.1s;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+.form.hidden .heading {
+  -webkit-transform: translateY(60px);
+          transform: translateY(60px);
+  opacity: 0;
+}
+
+.sliding-list {
+  font-size: 6vmin;
+  height: 1.5em;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  font-weight: 200;
+  transition: 0.8s all ease 0.2s;
+}
+.form.hidden .sliding-list {
+  -webkit-transform: translateY(60px);
+          transform: translateY(60px);
+  opacity: 0;
+}
+.sliding-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: 0.3s -webkit-transform;
+  transition: 0.3s transform;
+  transition: 0.3s transform, 0.3s -webkit-transform;
+  text-align: center;
+}
+.sliding-list li {
+  line-height: 1.5em;
+}
+
+.slider {
+  margin-bottom: 1.5rem;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 300px;
+  background: transparent;
+  transition: 0.8s all ease 0.3s;
+}
+.form.hidden input[type=range] {
+  -webkit-transform: translateY(60px);
+          transform: translateY(60px);
+  opacity: 0;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 26px;
+  background: white;
+  border: 3px solid #4d4d4d;
+  border-radius: 20px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #4d4d4d;
+  cursor: pointer;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #e6e6e6;
+}
+input[type=range]::-moz-range-track {
+  width: 300px;
+  height: 20px;
+  background: white;
+  border: 3px solid #4d4d4d;
+  border-radius: 20px;
+}
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #4d4d4d;
+  cursor: pointer;
+}
+input[type=range]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+input[type=range]::-ms-track {
+  width: 300px;
+  height: 20px;
+  background: white;
+  border: none;
+  border-radius: 20px;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  outline: none;
+  background: white;
+  border-radius: 20px 0 0 20px;
+}
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #4d4d4d;
+}
+input[type=range]:focus::-ms-track {
+  background: #e6e6e6;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #e6e6e6;
+}
+
+footer {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+}
+.select-control {
+  display: block;
+  width: 100%;
+  height: calc(2.0625rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #5c6873;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e4e7ea;
+      border-top-color: rgb(228, 231, 234);
+      border-right-color: rgb(228, 231, 234);
+      border-bottom-color: rgb(228, 231, 234);
+      border-left-color: rgb(228, 231, 234);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.select-control:focus {
+
+  color: #5c6873;
+  background-color: #fff;
+  border-color: #8ad4ee;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
+
+}
+
+@media only screen and (min-width : 600px) {
+  .select-control {
+    display: block;
+    width: 55%;
+  }
+}
+
+textarea {
+  height:auto;
+  max-width:600px;
+  color:#222;
+  font-weight:400;
+  font-size:15px;
+  font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+  width: 100%;
+  background:#fff;
+  border-radius:3px;
+  line-height:2em;
+  border:none;
+  box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding:15px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
+}
+
+.button-contact {
+  margin: 0 auto;
+  font-size: 2.0rem;
+  padding: 1.25rem 2.5rem;
+  display: block;
+  background-color: #009ac9;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-weight: 300;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-contact:hover {
+  background-color: #ffffff;
+  color: #009ac9;
+  border-color: #009ac9;
+}
+
+</style>

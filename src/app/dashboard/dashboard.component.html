@@ -1,0 +1,267 @@
+<div style="min-width: 900px;" class='app sidebar-show header-fixed sidebar-fixed footer-fixed' id="app-body">
+  <!-- Header content here -->
+  <nav style="height: 60px;" class="app-header navbar navbar-expand-lg">
+      <div id="side-menu" style="background-color:#f0f3f5 !important;">
+          <button class="close"><span aria-hidden="true">×</span></button>
+        </div>
+
+    <a class="navbar-brand" href="">
+      <img src='/assets/images/small_logo.png'  width="55" height="60" class="d-inline-block align-center" alt="">
+      <img src='/assets/images/nav_logo.png'  width="60" height="22" class="d-inline-block align-center" alt="">
+    </a>
+
+
+    <div class="" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="">
+            <button class="btn btn-outline-dark" type="button">HOME</button>
+            <span class="sr-only">(current)</span>
+            
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="app-body" style='margin-top: 60px;'>
+    <!-- Sidebar content here -->
+    <div class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav">
+          <li class="nav-title active">
+            <i class="speedometer"></i> Dashboard </li>
+          <li class="nav-item">
+            <a class="nav-link data" (click)='showData();'>
+              <i class="nav-icon fas fa-database"></i> Data
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link analysis active" (click)='showAnalysis();'>
+              <i class="nav-icon fas fa-chart-area"></i> Analysis
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link prediction" (click)='showPrediction();'>
+              <i class="nav-icon fas fa-search-dollar"></i> Prediction
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+
+
+  <main class="main" style='margin-top:30px;'>
+    <!-- Main content here -->
+      <div id='data' style='display: none;' class='container-fluid '>
+        <div class="card">
+          <div class="card-header">
+            Headline
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{ headline }}</p>
+              </blockquote>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Content
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{ content }}</p>
+              </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div id='analysis' class='container-fluid'>
+          <div class="row">
+              <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-success">
+                    <div class="card-body">
+                      <div class="text-value" style='font-size:40px;'>{{ word_count }}</div>
+                      <div style='font-size:30px;'>Word Count</div>
+                      <small class="text-muted" style='font-size:15px;'>Total number words in the content of news article.</small>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-warning">
+                    <div class="card-body">
+                      <div class="text-value" style='font-size:40px;'>{{ difficult_words }}</div>
+                      <div style='font-size:30px;'>Difficult words</div>
+                      <small class="text-muted" style='font-size:15px;'>Total number of words marked as difficult for understanding.</small>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-primary">
+                  <div class="card-body">
+                    <div class="text-value" style='font-size:40px;'>{{ reading_standard }}</div>
+                      <div style='font-size:30px;'>Reading Standard</div>
+                      <small class="text-muted" style='font-size:15px;'>Defines level of text understanding based on the vocabulary.</small>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-danger">
+                  <div class="card-body">
+                    <div class="text-value" style='font-size:40px;'>{{ lexical_diversity }}</div>
+                    <div style='font-size:30px;'>Lexical Diversity</div>
+                    <small class="text-muted" style='font-size:15px;'>The ratio of different unique word stems (types) to the total number of words.</small>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+          </div>
+
+          <div class="card-columns cols-2">
+              <div class="card">
+                  <div class="card-header">Word Distribution with Stop Words
+                    <div class="card-header-actions">
+                    </div>
+                    </div>
+                    <div class="card-body">
+                     <div class="chart-wrapper"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor">
+                      <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                         <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                      </div>
+
+                      <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                          <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                          </div>
+                      </div>
+                      <div  >
+                          <canvas id="chartLine1" style="display: block;" width="647" height="323" class="chartjs-render-monitor">{{ chart1 }}</canvas>
+                        </div>
+
+                    </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header">Sentiment Analysis
+                    <div class="card-header-actions">
+                    </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart-wrapper"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="sentiment" style="display: block;" width="647" height="323" class="chartjs-render-monitor">{{ sentiment }}</canvas>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              <div class="card">
+                <div class="card-header">Word Distribution without Stop Words
+                  <div class="card-header-actions">
+                  </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart-wrapper"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor">
+                      <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div>
+                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                          <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="chartLine2" style="display: block;" width="647" height="323" class="chartjs-render-monitor">
+                        {{ chart2 }}
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                  <div class="card-header">Dependency Graph
+                    <div class="card-header-actions">
+                    </div>
+                    </div>
+                    <div class="card-body">
+                     <div class="chart-wrapper"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor">
+                      <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                         <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                      </div>
+
+                      <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                          <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                          </div>
+                      </div>
+                     <div id="dependency" style="display: block;" width="647" height="323" class="chartjs-render-monitor">
+                     <h3 align='center' style='padding-top:10px;'>
+                       <button class="btn btn-success " (click)="svgGenerate()">Download</button>
+                    </h3>
+                    <p style="padding-top:8px;">
+                        Use the above button to download dependency graph. Example shown below.
+                    </p>
+                    <div>
+                      <img src="/assets/images/dependency.png" height="100%" width="100%"/>
+                    </div>
+
+                    </div>
+
+                    </div>
+                  </div>
+              </div>
+
+
+
+          </div>
+
+
+              <div class="card">
+                <div class="card-header">
+                  Name Entity Recognition
+                </div>
+                <div class="card-body" id="ner">
+
+                </div>
+              </div>
+
+      </div>
+
+      <div id='prediction' style='display:none;'>
+          <div class='container-fluid'>
+              <h1 align='center'>Based on our analysis, article is:</h1>
+                <h1 align='center' style='font-size: 100px; font-weight: bold;'>{{ predicted_class }}</h1>
+            </div>
+        <div class='container-fluid'>
+          <h1 align='center'>with a probability of:</h1>
+            <h1 align='center' style='font-size: 200px;'>{{ percentage }}%</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                  <p class="text-center">
+                    <a href="contact">
+                      <button type="button" class="btn btn-dark btn-lg"><span class="cui-contrast"></span>Doubt it?</button>
+                    </a>
+                  </p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+  </main>
+
+  </div>
+  <footer class="app-footer">
+    <div class="ml-auto">
+      ELISA &copy; 2018.
+    </div>
+    <div class="ml-auto">
+    </div>
+  </footer>
+</div>

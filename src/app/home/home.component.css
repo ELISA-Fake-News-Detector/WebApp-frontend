@@ -1,0 +1,28 @@
+/* robomex style*/
+.img-fluid{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#home{
+  width: 100%;
+}
+
+.card-title{
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.form-title{
+  font-size:30px;
+}
+
+.form-group{
+  font-size:20px;
+}
+
+h3{
+  font-size: 40px;
+font-weight: bold;
+}

@@ -1,0 +1,173 @@
+<div class="container">
+  <div class="row">
+      <div class="col">
+        <p class="text-center">
+            <button type="button" style="display:inline;" id="article_button" class="btn btn-dark btn-lg" (click)="showArticle()">News Article</button>
+                &nbsp;&nbsp;&nbsp;
+            <button type="button" id="post_button" class="btn btn-secondary btn-lg" (click)="showPost()">Social Media Post</button>
+        </p>
+      </div>
+  </div>
+</div>
+<button style="display:none;  " type="button" id="errorButton" class="btn btn-primary" data-toggle="modal" data-target="#error">
+</button>
+
+<button style="display:none;  " type="button" id="successButton" class="btn btn-primary" data-toggle="modal" data-target="#succ">
+</button>
+<button style="display:none;  " type="button" id="loadButton" class="btn btn-primary" data-toggle="modal" data-target="#load">
+  </button>
+
+  <!-- Loading Modal -->
+  <div class="modal hide" style='background-color: white;' data-backdrop="static" data-keyboard="false" id="load" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="display: none;">
+              <div class="modal-header">
+              </div>
+              <div class="modal-body">
+                  <img style='align-content: center; margin: auto;' alt="submitting..." src="/assets/images/load.gif"/>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="closeButton" class="btn btn-dark" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+      </div>
+    </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="succ" tabindex="-1" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel2">Output</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="succMessage" style="color: #4F8A10;
+          background-color: #DFF2BF;" class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+              <a href="contact"><button type="button" class="btn btn-dark"><span class="cui-contrast"></span>Doubt it?</button></a>
+              <a type="button" id="showDashboard" style="display: none;" href='dashboard' class="btn btn-success" >Comprehensive Analysis</a>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Error Modal -->
+<div class="modal fade"  id="error" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title card-title" id="ModalLabel">Server error message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="errorMessage" style="color: #D8000C;
+      background-color: #FFBABA;" class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="article">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p class="text-center heading form-title">
+                Fake News Detection
+            </p>
+          </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="text-center">
+                It predicts and analyses the fake news.
+            </p>
+          </div>
+    </div>
+
+  <div class="row">
+      <div class="col" style="width:80%;">
+          <div class="form-group">
+            <label id="head" for="headline">Headline</label>
+            <textarea #headline class="form-control" id="headline" rows="2" placeholder="max length is 200 characters" oninput="document.getElementById('head').innerText= 'Headline - ' + this.value.length + ' characters'; if(this.value.length > 200 || this.value.length < 5) document.getElementById('head').style.color = 'red'; else document.getElementById('head').style.color = 'green';"></textarea>
+          </div>
+
+          <div class="form-group">
+              <label id="cont" for="content">Content</label>
+              <textarea #content class="form-control" id="content" rows="4" placeholder="max length is 5000 characters" oninput="document.getElementById('cont').innerText= 'Content - ' + this.value.length + ' characters'; if(this.value.length > 5000 || this.value.length < 1000) document.getElementById('cont').style.color = 'red'; else document.getElementById('cont').style.color = 'green';"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p class="text-center">
+                        <button class="btn btn-info mb-2 btn-lg" type="submit" name="submit" (click)="articlePOST(headline.value, content.value);">Submit
+                          </button>
+                    </p>
+                  </div>
+            </div>
+
+          </div>
+  </div>
+</div>
+</div>
+
+<div id="post" style="display: none;">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <p class="text-center heading form-title">
+                  Clickbait Detection
+              </p>
+            </div>
+      </div>
+      <div class="row">
+          <div class="col">
+              <p class="text-center">
+                  It checks clickbaitness of social media post.
+              </p>
+            </div>
+      </div>
+
+    <div class="row">
+        <div class="col" style="width:80%;">
+            <div class="form-group">
+              <label id="pos" for="post">Social Media Post</label>
+              <textarea #post class="form-control" id="postData" rows="2" oninput="document.getElementById('pos').innerText= 'Social Media Post - ' + this.value.length + ' characters'; if(this.value.length < 5 || this.value.length > 30) document.getElementById('pos').style.color = 'red'; else document.getElementById('pos').style.color = 'green';" placeholder="max length is 30 characters"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="platform">Platform</label>
+              <select #platform class="form-control" id="platform">
+                  <option value="" disabled='disabled' selected='selected'>Choose your platform</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Others">Others</option>
+              </select>
+            </div>
+
+              <div class="row">
+                  <div class="col">
+                      <p class="text-center">
+                          <button class="btn btn-info mb-2 btn-lg" type="submit" name="submit" (click)="submitPost(post.value, platform.value);">Submit
+                            </button>
+                      </p>
+                    </div>
+              </div>
+
+            </div>
+    </div>
+  </div>
+</div>
