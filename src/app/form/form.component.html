@@ -82,7 +82,7 @@
 
 <div id="article">
 <div class="container">
-    <div class="row">
+    <div class="row"> 
         <div class="col">
             <p class="text-center heading form-title">
                 Fake News Detection
@@ -97,29 +97,84 @@
           </div>
     </div>
 
-  <div class="row">
-      <div class="col" style="width:80%;">
-          <div class="form-group">
-            <label id="head" for="headline">Headline</label>
-            <textarea #headline class="form-control" id="headline" rows="2" placeholder="max length is 200 characters" oninput="document.getElementById('head').innerText= 'Headline - ' + this.value.length + ' characters'; if(this.value.length > 200 || this.value.length < 5) document.getElementById('head').style.color = 'red'; else document.getElementById('head').style.color = 'green';"></textarea>
-          </div>
 
-          <div class="form-group">
-              <label id="cont" for="content">Content</label>
-              <textarea #content class="form-control" id="content" rows="4" placeholder="max length is 5000 characters" oninput="document.getElementById('cont').innerText= 'Content - ' + this.value.length + ' characters'; if(this.value.length > 5000 || this.value.length < 1000) document.getElementById('cont').style.color = 'red'; else document.getElementById('cont').style.color = 'green';"></textarea>
-            </div>
+<div class="accordion" id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn-link btn" style="color: #000;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Predict using article URL
+        </button>
+      </h5>
+    </div>
 
-            <div class="row">
-                <div class="col">
-                    <p class="text-center">
-                        <button class="btn btn-info mb-2 btn-lg" type="submit" name="submit" (click)="articlePOST(headline.value, content.value);">Submit
-                          </button>
-                    </p>
-                  </div>
-            </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+                                  <div class="row">
+                                      <div class="col" style="width:80%;">
+                                          <div class="form-group">
+                                            <input #url_link class="form-control" id="url_link" rows="2" placeholder="Enter news URL"/>
+                                          </div>
 
-          </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="text-center">
+                                                        <button class="btn btn-info mb-2 btn-lg" type="submit" name="submit" (click)="urlPOST(url_link.value);">Submit
+                                                          </button>
+                                                    </p>
+                                                  </div>
+                                            </div>
+
+                                          </div>
+                                    </div>
+                                    
+                                    
+                                          </div>
+    </div>
   </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" style="color: #000;"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Predict using news article headline and content
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+                                    <div class="row">
+                                        <div class="col" style="width:80%;">
+                                            <div class="form-group">
+                                              <label id="head" for="headline">Headline</label>
+                                              <textarea #headline class="form-control" id="headline" rows="2" placeholder="max length is 200 characters" oninput="document.getElementById('head').innerText= 'Headline - ' + this.value.length + ' characters'; if(this.value.length > 200 || this.value.length < 5) document.getElementById('head').style.color = 'red'; else document.getElementById('head').style.color = 'green';"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label id="cont" for="content">Content</label>
+                                                <textarea #content class="form-control" id="content" rows="4" placeholder="max length is 5000 characters" oninput="document.getElementById('cont').innerText= 'Content - ' + this.value.length + ' characters'; if(this.value.length > 5000 || this.value.length < 1000) document.getElementById('cont').style.color = 'red'; else document.getElementById('cont').style.color = 'green';"></textarea>
+                                              </div>
+
+                                              <div class="row">
+                                                  <div class="col">
+                                                      <p class="text-center">
+                                                          <button class="btn btn-info mb-2 btn-lg" type="submit" name="submit" (click)="articlePOST(headline.value, content.value);">Submit
+                                                            </button>
+                                                      </p>
+                                                    </div>
+                                              </div>
+
+                                            </div>
+                                    </div>
+  
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 </div>
 </div>
 

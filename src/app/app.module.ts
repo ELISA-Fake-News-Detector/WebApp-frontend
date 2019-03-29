@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ResearchComponent } from './research/research.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormComponent,
     ContactComponent,
     ErrorComponent,
-    DashboardComponent ],
+    DashboardComponent,
+    ResearchComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -222,5 +222,26 @@ export class FormComponent implements OnInit {
 
   }
 
+  urlPOST(url_link) {
+    const message = document.getElementById('errorMessage');
+
+    message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;';
+
+    if (!this.validURL(url_link)) {
+      message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' + ' Check your URL.';
+      document.getElementById('errorButton').click();
+      return false;
+    }
+    document.getElementById('loadButton').click();
+  }
+
+  validURL(str) {
+    const regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    if (!regex .test(str)) {
+      return false;
+    } else {
+      return true;
+    }
+    }
 
 }
