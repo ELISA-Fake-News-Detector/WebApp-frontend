@@ -12,7 +12,7 @@ import {timeout, catchError} from 'rxjs/operators';
 
 export class ContactComponent implements OnInit {
 
-  feedbackURL = 'http://localhost:8000/api/feedback';
+  feedbackURL = 'https://elisatheai.me/api/feedback';
 
   constructor(private http: HttpClient, private router: Router) { }
 
