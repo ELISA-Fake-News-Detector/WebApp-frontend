@@ -1,0 +1,15 @@
+.card {
+    margin: 4%;
+}
+
+.app-footer {
+    padding: 10px;
+}
+
+.card-text {
+    font-size: 1.5em;
+}
+
+.card-header {
+    font-size: 2em;
+}

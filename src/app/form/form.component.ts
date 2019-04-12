@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   constants: any;
   articleURL = 'http://localhost:8000/api/article';
   postURL = 'http://localhost:8000/api/post';
+  newsURL = 'http://localhost:8000/api/url_predict';
 
   constructor(private http: HttpClient, private _router: Router) {
   }
@@ -233,6 +234,74 @@ export class FormComponent implements OnInit {
       return false;
     }
     document.getElementById('loadButton').click();
+
+    const req = this.http.post(this.newsURL, {
+      url: url_link
+    }).pipe(
+      timeout(5000)
+    ).subscribe(
+        res => {
+          document.getElementById('loadButton').click();
+          if (res['message']['status'] === 'success') {
+
+            // store API data in session for reference
+            sessionStorage.setItem('response', JSON.stringify(res));
+
+            // compute % and class
+            const percentage = Math.round(res['prediction']['probability'] * 100);
+            const predicted_class = res['prediction']['predicted_class'];
+
+            // show in-depth analysis button
+            document.getElementById('showDashboard').style.display = 'block';
+
+            // show success modal
+            document.getElementById('succMessage').innerHTML = '<p style="font-size:30px;"><b style="font-weight:bold;">Prediction:</b> ' +
+                                                                 predicted_class  +
+                                      '</p><br/><h1 align="center" style="font-size:20vh;">' + percentage + '%</h1>NOTE: For in-depth' +
+                                      ' anal' + 'ysis use below button.';
+            document.getElementById('successButton').click();
+
+            // clear the form content
+            document.getElementById('head').innerText = 'Headline';
+            document.getElementById('head').style.color = 'black';
+            document.getElementById('cont').innerText = 'Content';
+            document.getElementById('cont').style.color = 'black';
+            (document.getElementById('headline') as HTMLInputElement).value = '';
+            (document.getElementById('content') as HTMLInputElement).value = '';
+
+          } else {
+
+            // show error modal
+            message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' + res['message']['description'];
+            document.getElementById('errorButton').click();
+
+          }
+        },
+        err => {
+          try {
+            document.getElementById('loadButton').click();
+            if (err.statusText === 'Unknown Error') {
+              message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' +
+              ' API is offline. <a style="color:red;" href="contact">&nbsp;<u>Report us!</u></a>';
+            } else if (err.error.message.status === 'error') {
+
+              message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' +
+              ' Looks like server is angry.' + '<a style="color:red;" href="contact">&nbsp;<u>Report us!</u></a>';
+            } else {
+              message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' +
+              ' We are having a bad day. Try again.' + ' <a style="color:red;" href="contact">&nbsp;<u>Report us!</u></a>';
+            }
+            document.getElementById('errorButton').click();
+
+          } catch {
+            message.innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;' +
+             ' We are having a bad day. Try again';
+             document.getElementById('errorButton').click();
+
+          }
+        }
+      );
+    return;
   }
 
   validURL(str) {
