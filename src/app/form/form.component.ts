@@ -12,9 +12,9 @@ import {timeout, catchError} from 'rxjs/operators';
 
 export class FormComponent implements OnInit {
   constants: any;
-  articleURL = 'http://elisatheai.me/api/article';
-  postURL = 'http://elisatheai.me/api/post';
-  newsURL = 'http://elisatheai.me/api/url_predict';
+  articleURL = 'https://elisatheai.me/api/article';
+  postURL = 'https://elisatheai.me/api/post';
+  newsURL = 'https://elisatheai.me/api/url_predict';
 
   constructor(private http: HttpClient, private _router: Router) {
   }
