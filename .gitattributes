@@ -1,0 +1,13 @@
+# THIS IS ONLY FOR THE gitattributes REPOSITORY.
+# Handle line endings automatically for files detected as text and leave all files detected as binary untouched.
+* text=auto
+
+
+# for normalizing
+*.gitattributes text
+.gitignore text
+*.md text
+
+
+src/assets/js/* linguist-vendored
+src/assets/css/* linguist-vendored
